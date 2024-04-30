@@ -6,6 +6,7 @@ var auto = {
     maxBrzina: 220,
     registriran: true,
     ubrzaj: function(vrijeme){
+        this.brzina = vrijeme * 5;
         return vrijeme * 5;
     },
     zakoci: function(vrijeme){
