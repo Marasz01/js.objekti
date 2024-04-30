@@ -1,21 +1,47 @@
 var auto = {
-    boja: "crna",
-    marka: { tip: "Opel", model: "Astra"},
-    cijena: 2000,
+    marka: "Opel",
+    model: "Astra",
+    godinaProizvodnje: 2006,
+    boja: "Siva",
     brzina: 10,
     maxBrzina: 220,
-    registriran: true,
-    ubrzaj: function(vrijeme){
-        this.brzina = vrijeme * 5;
-        return vrijeme * 5;
+    vlasnik: {
+      ime: "Ivan",
+      prezime: "Maras",
+      dob: 23
     },
-    zakoci: function(vrijeme){
-        return vrijeme / 5;
+    
+    ubrzaj: function(koliko) {
+      this.brzina = Math.min(this.brzina + koliko, this.maxBrzina);
+      return this.brzina;
     },
-    promjeniBoju: function(novaBoja){
-        this.boja = novaBoja;
-        return this.boja;
+    
+    zakoči: function(koliko) {
+      this.brzina = Math.max(this.brzina - koliko, 0);
+      return this.brzina;
     },
-};
+    
+    promijeniBoju: function(novaBoja) {
+      this.boja = novaBoja;
+      return this.boja;
+    }
+  };
+  
 
-console.log("auto JSON -->" + JSON.stringify(auto));
+  console.log("Brzina nakon ubrzavanja:", auto.ubrzaj(50));  
+  console.log("Brzina nakon kočenja:", auto.zakoči(20));   
+  console.log("Nova boja auta:", auto.promijeniBoju("Plava")); 
+  
+
+  console.log("Sve brojčane vrijednosti u objektu:");
+  for (const key in auto) {
+    if (typeof auto[key] === 'number') {
+      console.log(`${key}: ${auto[key]}`);
+    }
+  }
+  
+  console.log(`Auto marke ${auto.marka} model ${auto.model} sada je ${auto.boja} boje.`);
+  
+  const jsonAuto = JSON.stringify(auto);
+  console.log("JSON reprezentacija objekta:", jsonAuto);
+  
